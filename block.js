@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 class Block {
   constructor(timestamp, data, hash, previousHash) {
@@ -18,7 +18,15 @@ class Block {
   }
 
   static genesis() {
-    return new this("genesis", [], "1", "0");
+    return new this('genesis', [], '1', '0');
+  }
+
+  static newBlock(data, previousBlock) {
+    const timestamp = Date.now();
+    const hash = 'hash';
+    const previousHash = previousBlock.hash;
+
+    return new this(timestamp, data, hash, previousHash);
   }
 }
 
