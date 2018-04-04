@@ -16,6 +16,10 @@ class Block {
       Hash        : ${this.hash}  
       PreviousHash: ${this.previousHash}`
   }
+
+  static genesis() {
+    return new this("genesis", [], "1", "0");
+  }
 }
 
 module.exports = Block;
