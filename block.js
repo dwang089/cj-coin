@@ -1,5 +1,7 @@
 'use strict'
 
+const SHA256 = require('crypto-js/sha256');
+
 class Block {
   constructor(timestamp, data, hash, previousHash) {
     this.timestamp = timestamp;
@@ -23,10 +25,14 @@ class Block {
 
   static newBlock(data, previousBlock) {
     const timestamp = Date.now();
-    const hash = 'hash';
     const previousHash = previousBlock.hash;
+    const hash = Block.hash(timestamp, data, previousHash); 
 
     return new this(timestamp, data, hash, previousHash);
+  }
+
+  static hash(timestamp, data, previousHash) {
+    return SHA256(`${timestamp}${data}${previousHash}`).toString();
   }
 }
 
