@@ -1,1 +1,1 @@
-# cj-coin
+# dj-coin
