@@ -34,6 +34,11 @@ class Block {
   static hash(timestamp, data, previousHash) {
     return SHA256(`${timestamp}${data}${previousHash}`).toString();
   }
+
+  static blockHash(block) {
+    const { timestamp, data, previousHash } = block;
+    return block.hash(timestamp, data, previousHash);
+  }
 }
 
 module.exports = Block;
