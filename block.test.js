@@ -1,5 +1,5 @@
 const Block = require('./block');
-const { DIFFICULTY } = require('./config');
+const { DIFFICULTY, RATE } = require('./config');
 
 describe('Block', () => {
   let data;
@@ -21,7 +21,16 @@ describe('Block', () => {
   });
 
   test('create hash for proof of work', () => {
-    expect(block.hash.substring(0, DIFFICULTY)).toEqual('0'.repeat(DIFFICULTY));
+    expect(block.hash.substring(0, block.difficulty))
+      .toEqual('0'.repeat(block.difficulty));
+    
+    console.log(block.toString()); 
+  });
+
+  test('change difficulty dynamically', () => {
+    expect(Block.updateDifficulty(block, block.timestamp + 5000))
+      .toEqual(block.difficulty + 1);
+    
     console.log(block.toString()); 
   });
 });
