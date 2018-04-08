@@ -26,18 +26,18 @@ class Block {
   static newBlock(data, previousBlock) {
     const timestamp = Date.now();
     const previousHash = previousBlock.hash;
-    const hash = Block.hash(timestamp, data, previousHash); 
+    const hash = Block.createHash(timestamp, data, previousHash); 
 
     return new this(timestamp, data, hash, previousHash);
   }
 
-  static hash(timestamp, data, previousHash) {
+  static createHash(timestamp, data, previousHash) {
     return SHA256(`${timestamp}${data}${previousHash}`).toString();
   }
 
   static blockHash(block) {
     const { timestamp, data, previousHash } = block;
-    return block.hash(timestamp, data, previousHash);
+    return block.createHash(timestamp, data, previousHash);
   }
 }
 
