@@ -16,6 +16,10 @@ class Utils {
   static generateHash(data) {
     return SHA256(JSON.stringify(data)).toString();
   }
+
+  static verifySignature(publicKey, hash, signature) {
+    return ec.keyFromPublic(publicKey, 'hex').verify(hash, signature);
+  }
 }
 
 module.exports = Utils;
