@@ -2,7 +2,7 @@ const Utils = require('./utils');
 
 class Transaction {
   constructor() {
-    this.id = Utils.createId();
+    this.id = Utils.generateId();
     this.input = null;
     this.output = [];
   }
@@ -20,7 +20,17 @@ class Transaction {
       {amount: amount, address: receiver }
     ])
 
+    Transaction.signTransaction(transaction, sender);
     return transaction;
+  }
+
+  static signTransaction(transaction, sender) {
+    transaction.input = {
+      timestamp: Date.now(),
+      address: sender.publicKey,
+      amount: sender.balance,
+      signature: sender.sign(Utils.generateHash(transaction.output))
+    }
   }
 }
 

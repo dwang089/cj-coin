@@ -1,7 +1,7 @@
 'use strict'
 
-const SHA256 = require('crypto-js/sha256');
 const { DIFFICULTY, RATE } = require('./config');
+const Utils = require('./utils');
 
 class Block {
   constructor(timestamp, data, hash, previousHash, nonce, difficulty) {
@@ -47,7 +47,7 @@ class Block {
   }
 
   static createHash(timestamp, data, previousHash, nonce, difficulty) {
-    return SHA256(`${timestamp}${data}${previousHash}${nonce}${difficulty}`).toString();
+    return Utils.generateHash(`${timestamp}${data}${previousHash}${nonce}${difficulty}`).toString();
   }
 
   static blockHash(block) {

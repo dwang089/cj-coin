@@ -25,6 +25,10 @@ describe('Transaction', () => {
         output.address === receiver).amount)
         .toEqual(amount);
   });
+
+  test('input balance', () => {
+    expect(transaction.input.amount).toEqual(sender.balance);
+  });
 });
 
 describe('Invalid Transaction', () => {

@@ -13,6 +13,10 @@ class Wallet {
       PublicKey: ${this.publicKey.toString()}
       Balance  : ${this.balance}`;
   }
+
+  sign(hash) {
+    return this.keyPair.sign(hash);    
+  }
 }
 
 module.exports = Wallet;
