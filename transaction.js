@@ -42,15 +42,15 @@ class Transaction {
   }
 
   update(sender, receiver, amount) {
-    const output = this.output(output => output.address === sender.publicKey);
+    const output = this.output.find(output => output.address === sender.publicKey);
 
     if (amount > sender.amount) {
       console.log("Amount ${amount} exceeds balance");
       return;
     }
 
-    sender.output.amount = output.amount - amount;
-    this.output.push({amount: amount, address: receiver});
+    output.amount -= amount;
+    this.output.push({amount, address: receiver});
     Transaction.signTransaction(this, sender);
 
     return this;

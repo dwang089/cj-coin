@@ -49,7 +49,7 @@ describe('Invalid Transaction', () => {
   beforeEach(() => {
     sender = new Wallet();
     receiver = 'receiver2';
-    amonut = 1000;
+    amount = 1000;
     transaction = Transaction.newTransaction(sender, receiver, amount);
   });
 
@@ -58,23 +58,27 @@ describe('Invalid Transaction', () => {
   });
 
   describe('Update transaction', () => {
+    let amount;
     let newAmount;
     let receiver;
+    let transaction;
 
     beforeEach(() => {
+      amount = 100;
       newAmount = 50;
       receiver = 'receiver';
+      transaction = Transaction.newTransaction(sender, receiver, amount);
       transaction = transaction.update(sender, receiver, newAmount);
     });
 
     test('update amount', () => {
-      expect(transaction.output.find(output => output.address === sender.publicKey))
+      expect(transaction.output.find(output => output.address === sender.publicKey).amount)
         .toEqual(sender.balance - amount - newAmount);
     });
 
     test('update receiver amount', () => {
       expect(transaction.output.find(output => output.address === receiver).amount)
-        .toEqual(newAmount);
+        .toEqual(amount);
     });
   });
 });
